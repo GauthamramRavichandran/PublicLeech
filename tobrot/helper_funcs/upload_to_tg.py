@@ -45,6 +45,7 @@ async def upload_to_tg(
 ):
     LOGGER.info(local_file_name)
     base_file_name = os.path.basename(local_file_name)
+    LOGGER.info(base_file_name)
     caption_str = custom_caption
     if not (caption_str and edit_media):
         LOGGER.info("fall-back to default file_name")
@@ -63,12 +64,12 @@ async def upload_to_tg(
         # number_of_files = len(directory_contents)
         LOGGER.info(directory_contents)
         new_m_esg = message
-        if not message.photo:
-            new_m_esg = await message.reply_text(
-                "Found {} files".format(len(directory_contents)),
-                quote=True
-                # reply_to_message_id=message.message_id
-            )
+        # if not message.photo:
+        new_m_esg = await message.reply_text(
+            "Found {} files".format(len(directory_contents)),
+            quote=True
+            # reply_to_message_id=message.message_id
+        )
         for single_file in directory_contents:
             # recursion: will this FAIL somewhere?
             await upload_to_tg(
@@ -320,5 +321,5 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
     else:
         if message.message_id != message_for_progress_display.message_id:
             await message_for_progress_display.delete()
-    os.remove(local_file_name)
+    # os.remove(local_file_name)
     return sent_message
