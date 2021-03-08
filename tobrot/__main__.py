@@ -136,12 +136,12 @@ if __name__ == "__main__" :
         )
         app.add_handler(eval_message_handler)
 
-        # MEMEs COMMANDs
-        upload_document_handler = MessageHandler(
-            upload_document_f,
-            filters=filters.command([Commandi.UPLOAD]) & filters.user(users=SUDO_USERS)
-        )
-        app.add_handler(upload_document_handler)
+    # Upload COMMANDs
+    upload_document_handler = MessageHandler(
+        upload_document_f,
+        filters=filters.command([Commandi.UPLOAD]) & filters.user(users=SUDO_USERS)
+    )
+    app.add_handler(upload_document_handler)
 
     # HELP command
     help_text_handler = MessageHandler(
@@ -192,9 +192,9 @@ if __name__ == "__main__" :
     )
     app.add_handler(upload_log_f_handler)
     # upload file command
-    upload_file_handler = MessageHandler(upload_file,
-                                         filters=filters.command([Commandi.UPLOAD]) & filters.user(users=SUDO_USERS))
-    app.add_handler(upload_file_handler)
+    # upload_file_handler = MessageHandler(upload_file,
+    #                                      filters=filters.command([Commandi.UPLOAD]) & filters.user(users=SUDO_USERS))
+    # app.add_handler(upload_file_handler)
 
     # run the APPlication
     app.run()
