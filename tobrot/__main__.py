@@ -32,7 +32,8 @@ from tobrot.plugins.incoming_message_fn import (
     incoming_message_f,
     incoming_youtube_dl_f,
     incoming_purge_message_f,
-    leech_commandi_f
+    leech_commandi_f,
+    upload_file
 )
 from tobrot.plugins.status_message_fn import (
     status_message_f,
@@ -190,6 +191,10 @@ if __name__ == "__main__" :
         filters=filters.command([Commandi.UPLOAD_LOG_FILE]) & filters.user(users=SUDO_USERS)
     )
     app.add_handler(upload_log_f_handler)
+    # upload file command
+    upload_file_handler = MessageHandler(upload_file,
+                                         filters=filters.command([Commandi.UPLOAD]) & filters.user(users=SUDO_USERS))
+    app.add_handler(upload_file_handler)
 
     # run the APPlication
     app.run()

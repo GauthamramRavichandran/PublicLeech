@@ -34,6 +34,7 @@ from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.create_r_o_m import get_markup
 from tobrot.helper_funcs.icntaosrtsba import leech_btn_k
 from tobrot.helper_funcs.fix_tcerrocni_images import proc_ess_image_aqon
+from tobrot.helper_funcs.upload_to_tg import upload_single_file
 
         
 async def incoming_purge_message_f(client, message):
@@ -173,3 +174,13 @@ async def incoming_youtube_dl_f(client, message):
             "**FCUK**! wat have you entered. \nPlease read /help \n"
             f"<b>API Error</b>: {cf_name}"
         )
+
+
+async def upload_file(client, message):
+    if len(message.command) <= 1:
+        return await message.reply_text("Format: /upload <file-name>")
+    filename = message.command[-1]
+    await upload_single_file(message, local_file_name=filename,
+                             from_user=message.from_user.id,
+                             caption_str="Uploaded!",
+                             edit_media=False)
